@@ -1,0 +1,67 @@
+To build nginx:
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Start MSYS bash.
+Check out nginx sources from the hg.nginx.org repository. For example:
+hg clone http://hg.nginx.org/nginx
+
+"C:\Program Files\TortoiseHg\hg.exe" clone http://hg.nginx.org/nginx
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Create a build and lib directories, and unpack zlib, PCRE and OpenSSL libraries sources into lib directory:
+mkdir objs
+mkdir objs/lib
+cd objs/lib
+tar -xzf ../../pcre2-10.39.tar.gz
+tar -xzf ../../zlib-1.2.11.tar.gz
+tar -xzf ../../openssl-1.1.1m.tar.gz
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Run configure script:
+auto/configure \
+    --with-cc=cl \
+    --with-debug \
+    --prefix= \
+    --conf-path=conf/nginx.conf \
+    --pid-path=logs/nginx.pid \
+    --http-log-path=logs/access.log \
+    --error-log-path=logs/error.log \
+    --sbin-path=nginx.exe \
+    --http-client-body-temp-path=temp/client_body_temp \
+    --http-proxy-temp-path=temp/proxy_temp \
+    --http-fastcgi-temp-path=temp/fastcgi_temp \
+    --http-scgi-temp-path=temp/scgi_temp \
+    --http-uwsgi-temp-path=temp/uwsgi_temp \
+    --with-cc-opt=-DFD_SETSIZE=1024 \
+    --with-pcre=objs/lib/pcre2-10.40 \
+    --with-zlib=objs/lib/zlib-1.2.12 \
+    --with-openssl=objs/lib/openssl-1.1.1o \
+    --with-openssl-opt=no-asm \
+    --with-http_ssl_module
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Run make:
+nmake
+
+"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Tools\MSVC\14.31.31103\bin\HostX86\x86\nmake.exe"
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+C:\msys64\home\nelco\Nginx_1.22.0\auto\cc\msvc
+
+C:\msys64\home\nelco\Nginx_1.22.0\src\os\win32\nginx.ico
+
+C:\msys64\home\nelco\Nginx_1.22.0\src\http\ngx_http_header_filter_module.c
+
+C:\msys64\home\nelco\Nginx_1.22.0\src\http\modules\ngx_http_upstream_ip_hash_module.c
+
+C:\msys64\home\nelco\Nginx_1.22.0\auto\lib\openssl\makefile.msvc
+
+C:\msys64\home\nelco\Nginx_1.22.0\src\core\nginx.h
+
